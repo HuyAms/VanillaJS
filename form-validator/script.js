@@ -28,12 +28,24 @@ function checkEmail(input) {
   }
 }
 
+// Check required fields
+function checkRequired(inputArr) {
+  inputArr.forEach(function(input) {
+    if (input.value.trim() === '') {
+      showError(input, `${getFieldName(input)} is required`)
+    } else {
+      showSuccess(username)
+    }
+  })
+}
+
+// Get field name
+function getFieldName(input) {
+  return input.id.charAt(0).toUpperCase() + input.id.slice(1)
+}
+
 form.addEventListener('submit', function(e) {
   e.preventDefault()
 
-  if (username.value === '') {
-    showError(username, 'Username is required')
-  } else {
-    showSuccess(username)
-  }
+  checkRequired([username, email, password, password2])
 })
